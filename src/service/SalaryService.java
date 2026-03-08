@@ -4,10 +4,20 @@ import entities.Employee;
 
 public class SalaryService {
 
-    PensionService pensionService = new PensionService();
-    TaxService taxService = new TaxService();
+    private PensionService pensionService;
+    private GeralTaxService geralTaxService;
+
+    public SalaryService(PensionService pensionService, GeralTaxService geralTaxService) {
+        this.pensionService = pensionService;
+        this.geralTaxService = geralTaxService;
+    }
 
     public double netSalary(Employee employee){
-        return employee.getGrossSalary() - taxService.tax(employee.getGrossSalary()) - pensionService.discount(employee.getGrossSalary());
+
+        double salary = employee.getGrossSalary();
+
+        return employee.getGrossSalary()
+                - geralTaxService.tax(salary)
+                - pensionService.discount(salary);
     }
 }

@@ -8,7 +8,11 @@ import service.TaxService;
 void main() {
 
     Employee employee = new Employee("Leonor", 4000);
-    SalaryService salaryService = new SalaryService();
+
+    PensionService pensionService = new PensionService();
+    TaxService taxService = new TaxService();
+
+    SalaryService salaryService = new SalaryService(pensionService, taxService);
 
     double netSalary = salaryService.netSalary(employee);
     IO.println("Net Salary: " + netSalary);
